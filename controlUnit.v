@@ -1,7 +1,7 @@
 //=========================================================================
 // Name & Email must be EXACTLY as in Gradescope roster!
-// Name: 
-// Email: 
+// Name: Weijie Yuan    
+// Email: wyuan024@ucr.edu
 // 
 // Assignment name: 
 // Lab section: 
@@ -28,5 +28,29 @@ module controlUnit  (
 // ------------------------------
 // Insert your solution below
 // ------------------------------ 
+
+
+reg [8:0] temp;
+
+always @ (instr_op) begin
+    case (instr_op)
+    
+        6'b000000: temp = 9'b100100010; //r
+        6'b001000: temp = 9'b110100010; //imm
+        6'b000100: temp = 9'bx0x000101; //beq
+        6'b100011: temp = 9'b011110000; //lw
+        6'b101011: temp = 9'bx1x001000; //sw
+        
+        
+    endcase
+end
+assign reg_dst = temp[8];
+assign alu_src = temp[7];
+assign mem_to_reg = temp[6];
+assign reg_write = temp[5];
+assign mem_read = temp[4];
+assign mem_write = temp[3];
+assign branch = temp[2];
+assign alu_op = temp[1:0];
 
 endmodule
